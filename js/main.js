@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadEvents();
     loadGallery();
     
+    // Setup mobile navigation toggle
+    setupMobileNavigation();
+    
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -19,10 +22,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                // Close mobile menu after clicking a link
+                closeMobileMenu();
             }
         });
     });
 });
+
+// Setup mobile navigation toggle
+function setupMobileNavigation() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+    
+    if (navToggle && navMobile) {
+        navToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMobile.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMobile.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+    }
+}
+
+// Close mobile menu
+function closeMobileMenu() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+    
+    if (navToggle && navMobile) {
+        navToggle.classList.remove('active');
+        navMobile.classList.remove('active');
+    }
+}
 
 // Load menu items
 function loadMenu() {
