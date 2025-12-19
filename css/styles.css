@@ -187,6 +187,13 @@ section h2 {
 }
 
 /* Menu Section */
+.csic-logo-container {
+    display: flex;
+    max-height: 200px;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
 .menu-category {
     background: white;
     padding: 2rem;
