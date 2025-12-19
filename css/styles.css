@@ -73,6 +73,13 @@ nav ul {
     gap: 2rem;
 }
 
+/* Desktop navigation - hide on mobile */
+.nav-desktop ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
 nav a {
     color: blue;
     text-decoration: none;
@@ -84,12 +91,23 @@ nav a:hover {
     opacity: 0.8;
 }
 
+/* Hide mobile navigation on desktop by default */
+.nav-mobile {
+    display: none;
+}
+
+/* Hide mobile toggle on desktop by default */
+.nav-mobile-toggle {
+    display: none;
+}
+
 /* Mobile Navigation Toggle */
 .nav-mobile-toggle {
     display: none;
     flex-direction: column;
     cursor: pointer;
     padding: 0.5rem;
+    z-index: 1002;
 }
 
 .nav-mobile-toggle span {
@@ -103,7 +121,6 @@ nav a:hover {
 
 /* Mobile Navigation */
 .nav-mobile {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -113,6 +130,7 @@ nav a:hover {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
+    z-index: 1001;
 }
 
 .nav-mobile.active {
@@ -247,12 +265,6 @@ section h2 {
 }
 
 /* Menu Section */
-.csic-logo-container {
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 2rem;
-} 
-
 .menu-category {
     background: white;
     padding: 2rem;
@@ -405,18 +417,21 @@ footer {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        position: relative;
     }
 
-    .nav-desktop {
-        display: none;
+    /* Force hide all desktop navigation elements on mobile */
+    .nav-desktop, .nav-desktop ul {
+        display: none !important;
     }
 
+    /* Force show mobile elements on mobile */
     .nav-mobile-toggle {
-        display: flex;
+        display: flex !important;
     }
 
     .nav-mobile {
-        display: block;
+        display: block !important;
     }
 
     .hero h2 {
@@ -451,4 +466,27 @@ footer {
 
 .nav-mobile-toggle.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Additional mobile fixes */
+@media (max-width: 768px) {
+    /* Ensure header has relative positioning for mobile nav */
+    header {
+        position: relative;
+    }
+    
+    /* Force hide desktop nav on mobile */
+    .nav-desktop {
+        display: none !important;
+    }
+    
+    /* Force show mobile toggle on mobile */
+    .nav-mobile-toggle {
+        display: flex !important;
+    }
+    
+    /* Force show mobile nav container on mobile (but keep it collapsed) */
+    .nav-mobile {
+        display: block !important;
+    }
 }
